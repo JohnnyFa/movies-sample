@@ -3,6 +3,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movies_flutter_sample/common/di/setup_locator.dart';
 import 'package:movies_flutter_sample/common/observer/event_observer.dart';
+import 'package:movies_flutter_sample/feat/imdb/data/e_home_page_state.dart';
+import 'package:movies_flutter_sample/feat/imdb/data/movie.dart';
 import 'package:movies_flutter_sample/feat/imdb/repository/movies_api_repository.dart';
 import 'package:movies_flutter_sample/feat/imdb/viewmodel/home_page_vm.dart';
 
@@ -26,22 +28,40 @@ void main() {
     getIt.reset();
   });
 
+  Map<String, dynamic> mockMovieJson = {
+    "page": 1,
+    "results": [
+      {
+        "adult": false,
+        "backdrop_path": "/path/to/backdrop.jpg",
+        "genre_ids": [28, 12],
+        "id": 123,
+        "original_language": "en",
+        "original_title": "Mock Movie",
+        "overview": "This is a mock movie description.",
+        "popularity": 7.5,
+        "poster_path": "/path/to/poster.jpg",
+        "release_date": "2024-01-01",
+        "title": "Mock Movie",
+        "video": false,
+        "vote_average": 8.0,
+        "vote_count": 200,
+      },
+    ],
+    "total_pages": 1,
+    "total_results": 1,
+  };
+
   group('call tmdb api to fetch movies and handle states', () {
     test('on success', () async {
-      final mockResponseData = {
-        'results': [
-          {'title': 'Movie 1'},
-          {'title': 'Movie 2'},
-        ],
-      };
-      when(mockRepo.loadMovies()).thenAnswer((_) async => mockResponseData);
+
+      when(mockRepo.loadMovies()).thenAnswer((_) async => mockMovieJson);
 
       await viewModel.fetchMovies();
 
       verifyInOrder([
-        eventObserver.notify(HomePageViewModel.onLoading, true),
-        eventObserver.notify(HomePageViewModel.onLoading, false),
-        eventObserver.notify(HomePageViewModel.onSuccess, null)
+        eventObserver.notify(HomePageViewModel.onUpdateState, HomePageState.loading),
+        eventObserver.notify(HomePageViewModel.onUpdateState, HomePageState.success),
       ]);
       verify(mockRepo.loadMovies()).called(1);
     });
@@ -51,9 +71,8 @@ void main() {
       await viewModel.fetchMovies();
 
       verifyInOrder([
-        eventObserver.notify(HomePageViewModel.onLoading, true),
-        eventObserver.notify(HomePageViewModel.onLoading, false),
-        eventObserver.notify(HomePageViewModel.onError, null)
+        eventObserver.notify(HomePageViewModel.onUpdateState, HomePageState.loading),
+        eventObserver.notify(HomePageViewModel.onUpdateState, HomePageState.error),
       ]);
 
       verify(mockRepo.loadMovies()).called(1);

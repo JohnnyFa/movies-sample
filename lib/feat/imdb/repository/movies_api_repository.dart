@@ -9,7 +9,7 @@ class TmdbApiRepository {
     final json = await getClient.get(
       url: '/movie/popular',
       queryParameters: {
-        'language': 'en-US',
+        'language': 'pt-BR',
         'page': page,
       },
     );
