@@ -1,4 +1,4 @@
-import 'package:movies_flutter_sample/common/repo/dio_get_client.dart';
+import '../../../common/adapter/dio_get_client.dart';
 
 class TmdbApiRepository {
   TmdbApiRepository({required this.getClient});

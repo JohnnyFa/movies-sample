@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:movies_flutter_sample/common/repo/dio_get_client.dart';
 import '../interceptors/api_key_interceptor.dart';
 import '../interceptors/logg_interceptor.dart';
+import 'dio_get_client.dart';
 
 final class DioAdapter implements DioGetClient {
   final Dio client;

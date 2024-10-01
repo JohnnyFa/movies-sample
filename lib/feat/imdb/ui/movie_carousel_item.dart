@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movies_flutter_sample/common/constants/app_constants.dart';
 import 'package:movies_flutter_sample/feat/imdb/data/movie.dart';
+import 'package:movies_flutter_sample/feat/imdb/ui/movie_poster.dart';
 
 class MovieCarouselItem extends StatelessWidget {
   final Results movie;
@@ -21,16 +23,8 @@ class MovieCarouselItem extends StatelessWidget {
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-            Container(
-              height: 200.0,
-              color: Colors.black12,
-              child: const Center(
-                child: Icon(
-                  Icons.videocam,
-                  size: 50.0,
-                  color: Colors.grey,
-                ),
-              ),
+            MoviePoster(
+              moviePath: _fullPath,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -51,4 +45,6 @@ class MovieCarouselItem extends StatelessWidget {
       ),
     );
   }
+
+  String get _fullPath => '${AppConstants.imagesUrl}${AppConstants.posterSize}${movie.posterPath}';
 }

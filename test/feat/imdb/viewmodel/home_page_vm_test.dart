@@ -4,7 +4,6 @@ import 'package:mockito/mockito.dart';
 import 'package:movies_flutter_sample/common/di/setup_locator.dart';
 import 'package:movies_flutter_sample/common/observer/event_observer.dart';
 import 'package:movies_flutter_sample/feat/imdb/data/e_home_page_state.dart';
-import 'package:movies_flutter_sample/feat/imdb/data/movie.dart';
 import 'package:movies_flutter_sample/feat/imdb/repository/movies_api_repository.dart';
 import 'package:movies_flutter_sample/feat/imdb/viewmodel/home_page_vm.dart';
 

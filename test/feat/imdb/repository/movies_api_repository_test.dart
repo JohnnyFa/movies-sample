@@ -2,8 +2,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:movies_flutter_sample/common/adapter/dio_get_client.dart';
 import 'package:movies_flutter_sample/common/di/setup_locator.dart';
-import 'package:movies_flutter_sample/common/repo/dio_get_client.dart';
 import 'package:movies_flutter_sample/feat/imdb/repository/movies_api_repository.dart';
 
 import 'movies_api_repository_test.mocks.dart';
